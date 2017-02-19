@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 12px/20px arial;
+  padding: 15px;
+  width: 300px;
+}
+
+.row {
+  margin-bottom: 15px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+
+  /* Hide default HTML checkbox */
+  input {
+    display:none;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .25s;
+    &::before {
+      position: absolute;
+      content: 'ON';
+      height: 100%;
+      width: 50%;
+      left: 0;
+      bottom: 0;
+      background-color: #14b866;
+      transition: .4s;
+      color: #FFF;
+      text-align: center;
+      line-height: 30px;
+    }
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(100%);
+    background-color: #fc3636;
+    content: 'OFF';
+  }
+}
+
+label.select-label {
+  font-weight: 700;
+}
+
+input[type="text"] {
+  background-color: white;
+  border: 0;
+  border-radius: 0;
+  box-shadow: #dad8de 0 0 0 1px;
+  color: #433f4a;
+  display: block;
+  font-size: 12px;
+  font-family: inherit;
+  line-height: 20px;
+  outline: 0;
+  padding: 5px 22px 5px 10px;
+  position: relative;
+  resize: both;
+  transition: all .25s;
+  width: 100%;
+
+  &:focus {
+    box-shadow: #7d5bbe 0 0 0 1px, #7d5bbe 0 0 6px -2px;
+  }
+
+  &:disabled {
+    opacity: .5;
+  }
+}
+
+.dropdown {
+    color: #433f4a;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.05);
+    line-height: 15px;
+    max-height: 400px;
+    overflow: auto;
+    margin-top: 1px;
+
+  .dropdown-item {
+    padding: 5px 10px;
+    cursor: pointer;
+    &.hover {
+      color: white;
+      background-color: #6441a4;
+    }
+  }
+
+  .no-results {
+    padding: 10px;
+  }
+}

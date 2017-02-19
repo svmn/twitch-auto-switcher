@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="popup.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app" @click="isDropdownOpen = false">
+      <div class="row">
+        <label class="switch">
+          <input type="checkbox" v-model="isDisabled">
+          <div class="slider"></div>
+        </label>
+      </div>
+      <div class="row">
+        <label for="game-selector" class="select-label">
+          Choose preffered game
+        </label>
+        <input
+          type="text"
+          id="game-selector"
+          :disabled="isDisabled"
+          v-model="prefferedGame"
+          @click.stop="dropdownOpen"
+          @keydown="dropdownNavigation"
+          @keyup="autocomplete"
+        >
+        <div class="dropdown" v-if="isDropdownOpen">
+          <div
+            class="dropdown-item"
+            :class="{hover: hovered === index}"
+            v-for="(game, index) in gameList"
+            @click="prefferedGame = game"
+            @mouseenter="hovered = index"
+          >
+            {{game}}
+          </div>
+          <div class="no-results" v-if="!gameList.length">No results found</div>
+        </div>
+      </div>
+    </div>
+    <script src="scripts/popup.js"></script>
+  </body>
+</html>
