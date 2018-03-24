@@ -25,11 +25,17 @@ function bindOnStreamEnd () {
   const videoElement = document.querySelector('video');
   if (!videoElement) return;
 
+  videoElement.addEventListener('stalled', onStreamEnd);
   console.info('Twitch Auto Switcher: Binding to video element');
-  videoElement.addEventListener('ended', onStreamEnd);
 }
 
-function onStreamEnd () {
+window.addEventListener('keyup', (event) => {
+  if (event.key === 'F9') {
+    onStreamEnd();
+  }
+});
+
+function onStreamEnd() {
   Settings.getDisabled()
     .then(isDisabled => {
       // Check if extension is disabled
