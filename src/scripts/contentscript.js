@@ -4,38 +4,38 @@ import ChannelManager from './ChannelManager';
 import TwitchAPI from './TwitchAPI';
 import Settings from './Settings';
 
-let previousUrl = window.location.href;
+const INTERVAL = 1000;
+let videoElement = null;
 
-setTimeout(() => {
-  bindOnStreamEnd();
-
-  setInterval(() => {
-    const currentUrl = window.location.href;
-
-    if (currentUrl !== previousUrl) {
-      bindOnStreamEnd();
-      previousUrl = currentUrl;
-    }
-  }, 5000);
-}, 5000);
-
-function bindOnStreamEnd () {
-  if (!ChannelManager.isChannel()) return;
-
-  const videoElement = document.querySelector('video');
-  if (!videoElement) return;
-
-  videoElement.addEventListener('stalled', onStreamEnd);
-  console.info('Twitch Auto Switcher: Binding to video element');
+async function isStreamEnded(video) {
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  return video.paused && video.readyState === 2;
 }
 
-window.addEventListener('keyup', (event) => {
+
+
+function connect() {
+  if (!ChannelManager.isChannel()) return;
+
+  videoElement = document.querySelector('video');
+  if (videoElement) {
+    // watch();
+
+    videoElement.addEventListener(
+      'pause',
+      async () => (await isStreamEnded(videoElement)) && switchToNextStream(),
+    );
+    console.info('TAS: Connected');
+  }
+}
+
+window.addEventListener('keyup', event => {
   if (event.key === 'F9') {
-    onStreamEnd();
+    switchToNextStream();
   }
 });
 
-function onStreamEnd() {
+function switchToNextStream() {
   Settings.getDisabled()
     .then(isDisabled => {
       // Check if extension is disabled
@@ -43,21 +43,29 @@ function onStreamEnd() {
 
       const currentChannel = ChannelManager.getCurrentChannel();
 
-      return Settings.getPrefferedGame()
-        .then(prefferedGame => {
+      return Settings.getPreferredGame()
+        .then(preferredGame => {
           // If `Auto` then get current game
-          if (prefferedGame === 'Auto') {
-            return TwitchAPI.getStreamInfo(currentChannel)
-              .then(streamInfo => streamInfo.stream ? streamInfo.stream.game : null);
+          if (preferredGame === 'Auto') {
+            return TwitchAPI.getStreamInfo(currentChannel).then(streamInfo =>
+              streamInfo.stream ? streamInfo.stream.game : null,
+            );
           }
-          return prefferedGame;
+          return preferredGame;
         })
         .then(game => TwitchAPI.getStreamsByGame(game)) // get stream by games
         .then(streams => streams.filter(stream => stream !== currentChannel)) // remove current channel from list to avoid redirect to the same channel
-        .then(streams => streams.length ? streams : TwitchAPI.getFeaturedStreams()) // if no streams take featured list
+        .then(streams => (streams.length ? streams : TwitchAPI.getFeaturedStreams())) // if no streams take featured list
         .then(streams => streams.filter(stream => stream !== currentChannel)) // remove current channel again
         .then(streams => ChannelManager.setCurrentChannel(streams[0])); // redirect to next stream
     })
     .catch(console.error);
 }
 
+(function watch() {
+  if (videoElement !== document.querySelector('video')) {
+    connect();
+  }
+
+  setTimeout(() => watch(), INTERVAL);
+})();

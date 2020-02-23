@@ -9,13 +9,13 @@ export default {
     this.storageSet('disabled', disabled);
   },
 
-  getPrefferedGame () {
-    return this.storageGet('prefferedGame')
-      .then(prefferedGame => prefferedGame || 'Auto');
+  getPreferredGame () {
+    return this.storageGet('preferredGame')
+      .then(preferredGame => preferredGame || 'Auto');
   },
 
-  setPrefferedGame (prefferedGame) {
-    this.storageSet('prefferedGame', prefferedGame);
+  setPreferredGame (preferredGame) {
+    this.storageSet('preferredGame', preferredGame);
   },
 
   storageGet (key) {

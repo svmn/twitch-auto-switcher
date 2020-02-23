@@ -7,6 +7,7 @@
   <body>
     <div id="app" @click="isDropdownOpen = false">
       <div class="row">
+        <b>Enabled:</b>
         <label class="switch">
           <input type="checkbox" v-model="isDisabled">
           <div class="slider"></div>
@@ -14,13 +15,15 @@
       </div>
       <div class="row">
         <label for="game-selector" class="select-label">
-          Choose preffered game
+          Choose preferred game
         </label>
+      </div>
+    <div>
         <input
           type="text"
           id="game-selector"
           :disabled="isDisabled"
-          v-model="prefferedGame"
+          v-model="preferredGame"
           @click.stop="dropdownOpen"
           @keydown="dropdownNavigation"
           @keyup="autocomplete"
@@ -30,7 +33,7 @@
             class="dropdown-item"
             :class="{hover: hovered === index}"
             v-for="(game, index) in gameList"
-            @click="prefferedGame = game"
+            @click="preferredGame = game"
             @mouseenter="hovered = index"
           >
             {{game}}

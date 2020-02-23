@@ -15,7 +15,7 @@ const vm = new Vue({
   data: {
     isDisabled: false,
     gameList: [],
-    prefferedGame: null,
+    preferredGame: null,
     isDropdownOpen: false,
     hovered: 0
   },
@@ -38,7 +38,7 @@ const vm = new Vue({
       }
 
       if (e.key === 'Enter') {
-        this.prefferedGame = this.gameList[this.hovered];
+        this.preferredGame = this.gameList[this.hovered];
         this.isDropdownOpen = false;
         e.target.blur();
       }
@@ -53,15 +53,15 @@ const vm = new Vue({
     autocomplete: debounce(function (e) {
       if (['ArrowUp', 'ArrowDown', 'Enter'].includes(e.key)) return;
 
-      if (!this.prefferedGame) {
+      if (!this.preferredGame) {
         this.gameList = topGames;
         this.hovered = 0;
         return;
       }
 
-      TwitchAPI.searchGames(this.prefferedGame)
+      TwitchAPI.searchGames(this.preferredGame)
         .then(result => {
-          if (this.prefferedGame) {
+          if (this.preferredGame) {
             this.gameList = result;
             this.hovered = 0;
           }
@@ -72,13 +72,13 @@ const vm = new Vue({
 });
 
 vm.$watch('isDisabled',    newVal => Settings.setDisabled(newVal));
-vm.$watch('prefferedGame', newVal => Settings.setPrefferedGame(newVal));
+vm.$watch('preferredGame', newVal => Settings.setPreferredGame(newVal));
 
 Settings.getDisabled()
   .then(value => (vm.isDisabled = value));
 
-Settings.getPrefferedGame()
-  .then(value => (vm.prefferedGame = value));
+Settings.getPreferredGame()
+  .then(value => (vm.preferredGame = value));
 
 TwitchAPI.getGameList()
   .then(data => {

@@ -1,6 +1,6 @@
 {
   "name": "Twitch Auto Switcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "manifest_version": 2,
   "description": "Automatically switch stream when it's finished",
   "icons": {
@@ -25,7 +25,7 @@
       "js": [
         "scripts/contentscript.js"
       ],
-      "run_at": "document_idle",
+      "run_at": "document_end",
       "all_frames": false
     }
   ],

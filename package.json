@@ -1,6 +1,6 @@
 {
-  "name": "twitch-auto-switch",
-  "version": "1.0.0",
+  "name": "twitch-auto-switcher",
+  "version": "1.0.1",
   "description": "Chrome extension for Twitch.tv",
   "scripts": {
     "start": "webpack --watch",

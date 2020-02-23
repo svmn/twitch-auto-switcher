@@ -8,7 +8,8 @@ export default {
   request (query) {
     return fetch(this.endpoint + query, {
       headers: {
-        'Client-ID': this.clientId
+        'Client-ID': this.clientId,
+        'accept': 'application/vnd.twitchtv.v5+json', // TODO migrate to the new Twitch API
       }
     })
       .then(response => {
@@ -24,8 +25,14 @@ export default {
       .then(data => data.streams.map(item => item.channel.name));
   },
 
-  getStreamInfo (name) {
-    return this.request('/streams/' + name);
+  async getStreamInfo (channel) {
+    const channelId = await this.getChannelId(channel);
+    return this.request('/streams/' + channelId);
+  },
+
+  async getChannelId(channel) {
+    const response = await this.request(`/users/?login=${channel}`);
+    return response && response.users && response.users[0] && response.users[0]._id;
   },
 
   getGameList () {
