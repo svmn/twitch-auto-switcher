@@ -1,0 +1,39 @@
+{
+  "extName": {
+    "message": "Twitch Auto Switcher",
+    "description": ""
+  },
+  "extDescription": {
+    "message": "Switch to the next stream when current went offline"
+  },
+  "popupTitle": {
+    "message": "Twitch auto switcher settings"
+  },
+  "nextTargetTypeCommon": {
+    "message": "Common options"
+  },
+  "commonOptionCurrent": {
+    "message": "Currently watched category"
+  },
+  "commonOptionFeatured": {
+    "message": "Featured streams"
+  },
+  "nextTargetTypeCategory": {
+    "message": "Categories"
+  },
+  "nextTargetTypeChannel": {
+    "message": "Channels"
+  },
+  "searchPlaceholder": {
+    "message": "Search"
+  },
+  "nextTargetLabel": {
+    "message": "Select next stream:"
+  },
+  "enabledLabel": {
+    "message": "Enabled"
+  },
+  "noResults": {
+    "message": "No results found"
+  }
+}

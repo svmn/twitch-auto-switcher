@@ -1,0 +1,108 @@
+.tws-input {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-clip: padding-box;
+  background-color: rgba(0,0,0,.05);
+  border: 2px solid #0000000d;
+  border-radius: 4px;;
+  color: #0e0e10;
+  font-family: inherit;
+  height: 3rem;
+  line-height: 1.5;
+  outline: 0;
+  transition: box-shadow .1s ease-in,border .1s ease-in,background-color .1s ease-in;
+  display:block;
+  font-size: 1.2rem;
+  width: 100%;
+  padding: .5rem 1rem;
+}
+
+.tws-input::-webkit-input-placeholder {
+  color: rgba(0,0,0,.7);
+}
+
+.tws-input::-ms-input-placeholder {
+  color: rgba(0,0,0,.7);
+}
+
+.tws-input::placeholder {
+  color: rgba(0,0,0,.7);
+}
+
+.tws-input::-ms-clear {
+  display: none
+}
+
+.tws-input:-moz-focus-inner {
+  border: none;
+  padding: 0
+}
+
+.tws-input:focus {
+  background-color: #fff;
+  border-color: #9147ff;
+}
+
+.tws-input--error {
+  box-shadow: 0 0 8px -2px #e91916;
+}
+
+.tws-input--error,.tws-input--error:focus {
+  border: 2px solid #e91916;
+}
+
+.tws-input--error:focus {
+  box-shadow: 0 0 6px -3px #e91916;
+}
+
+.tws-input:disabled {
+  opacity: .5;
+  pointer-events: none
+}
+
+.tws-input[type=number] {
+  -moz-appearance: textfield
+}
+
+.tws-input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none
+}
+
+.tws-input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0
+}
+
+.tws-input__icon {
+  position: absolute;
+  width: 3.6rem;
+  padding: .8rem;
+  color: #53535f;
+  height: 100%;
+
+  &--left {
+    left: 0;
+  }
+  &--right {
+    right: 0;
+  }
+  &--action {
+    cursor: pointer;
+    transition: opacity ease .25s;
+    opacity: .5;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.tws-input--small {
+  height: 2.4rem;
+  padding: .2rem 0;
+}
+
+.tws-input--large {
+  height: 3.6rem;
+  font-size: 1.4rem;
+}

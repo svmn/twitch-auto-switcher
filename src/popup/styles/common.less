@@ -1,0 +1,95 @@
+@font-face {
+  font-family: Roobert;
+  font-weight: 400;
+  src: url(../assets/Roobert-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: Roobert;
+  font-weight: 600;
+  src: url(../assets/Roobert-SemiBold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: Roobert;
+  font-weight: 700;
+  src: url(../assets/Roobert-Bold.woff2) format('woff2');
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+svg {
+  fill: currentColor;
+}
+
+body {
+  padding: 16px;
+  width: 300px;
+  color: #0e0e10;
+  font-family: Roobert, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
+}
+
+.section {
+  transition: opacity ease 0.25s;
+  &--justify {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &--disabled {
+    opacity: 0.5;
+  }
+}
+
+label {
+  cursor: pointer;
+  font-weight: 700;
+  color: #18181b;
+  display: block;
+}
+
+hr {
+  margin: 1.4rem 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.mg-t-1 {
+  margin-top: 1rem;
+}
+
+.mg-b-1 {
+  margin-bottom: 1rem;
+}
+
+.pd-l-36 {
+  padding-left: 3.6rem !important;
+}
+
+.pd-r-36 {
+  padding-right: 3.6rem !important;
+}
+
+.relative {
+  position: relative;
+}
