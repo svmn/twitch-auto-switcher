@@ -6,6 +6,8 @@ export enum NextTargetType {
 
 export enum CommonOptionValue {
   Current = 'current',
+  Recommended = 'recommended',
+  Followed = 'followed',
   Featured = 'featured',
 }
 

@@ -18,6 +18,12 @@
   "commonOptionFeatured": {
     "message": "Featured streams"
   },
+  "commonOptionRecommended": {
+    "message": "Recommended streams"
+  },
+  "commonOptionFollowed": {
+    "message": "Followed channels"
+  },
   "nextTargetTypeCategory": {
     "message": "Categories"
   },

@@ -1,7 +1,8 @@
 import { TwitchAPI } from './twitch-api';
 import { UserSettings } from './user-settings';
 import { NextTargetType, CommonOptionValue } from '@/types/next-target.interface';
-import { getRandomElement } from './utils';
+import { getRandomElement, parseChannelName } from './utils';
+import { TwitchDomApi } from './twitch-dom-api';
 
 export class NoContentError extends Error {
   constructor() {
@@ -55,6 +56,16 @@ export class Switcher {
         break;
       }
 
+      case CommonOptionValue.Recommended: {
+        await this.switchToRecommended();
+        break;
+      }
+
+      case CommonOptionValue.Followed: {
+        await this.switchToFollowed();
+        break;
+      }
+
       default:
         throw new Error('Unknown next specific target value');
     }
@@ -79,6 +90,24 @@ export class Switcher {
     if (!filtered.length) throw new NoContentError();
     const random = getRandomElement(filtered);
     this.redirect(random.stream.channel.name);
+  }
+
+  private static async switchToRecommended() {
+    const currentStream = parseChannelName(window.location.pathname);
+    const streams =  TwitchDomApi.getRecommendedChannels().filter(x => x !== currentStream);
+    if (!streams.length) {
+      throw new NoContentError();
+    }
+    this.redirect(streams[0]);
+  }
+
+  private static async switchToFollowed() {
+    const currentStream = parseChannelName(window.location.pathname);
+    const streams =  TwitchDomApi.getFollowedChannels().filter(x => x !== currentStream);
+    if (!streams.length) {
+      throw new NoContentError();
+    }
+    console.log(streams);
   }
 
   private static async fallback(from: string) {

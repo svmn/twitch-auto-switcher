@@ -28,16 +28,17 @@ export class TwitchAPI {
   }
 
   public static async isOffline(id: string): Promise<boolean> {
-    const response = await this.getStreamById(id);
-    return !response.stream;
+    const response = await this.getStreamsByIds(id);
+    return response.streams.length === 0;
   }
 
   public static async getChannelById(id: string) {
     return this.request<ChannelResponse>(`/channels/${id}`);
   }
 
-  public static async getStreamById(id: string): Promise<StreamByUserResponse> {
-    return this.request<StreamByUserResponse>(`/streams/${id}`);
+  public static async getStreamsByIds(ids: string | string[]): Promise<LiveStreamsResponse> {
+    const idsArray = Array.isArray(ids) ? ids: [ids];
+    return this.request<LiveStreamsResponse>(`/streams/?channel=${idsArray.join(',')}`);
   }
 
   public static async getStreamsByCategory(category: string) {

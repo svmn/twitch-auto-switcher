@@ -13,6 +13,8 @@ export function buildList(categories: Game[]): NextTargetList {
 export function buildInitialList(categories: Game[]): NextTargetList {
   return [
     { type: NextTargetType.Common, value: CommonOptionValue.Current },
+    { type: NextTargetType.Common, value: CommonOptionValue.Followed },
+    { type: NextTargetType.Common, value: CommonOptionValue.Recommended },
     { type: NextTargetType.Common, value: CommonOptionValue.Featured },
     ...categories.map((x) => ({ type: NextTargetType.Category as const, value: x.name })),
   ];

@@ -3,7 +3,7 @@ import { Switcher } from '@/libs/switcher';
 import { tap } from 'rxjs/operators';
 
 (function () {
-  let currentChannel: string | null;
+  let currentChannel: string | undefined | null;
 
   Monitor.watchUrl()
     .pipe(
